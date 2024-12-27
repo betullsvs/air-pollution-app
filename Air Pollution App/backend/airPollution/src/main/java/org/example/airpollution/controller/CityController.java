@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,24 +35,52 @@ public class CityController {
 
 
 
-            City city = cityService.getCityDetailFromApi(airPollutionRequestDto);
+        City city = cityService.getCityDetailFromApi(airPollutionRequestDto);
 
 
-            dto.setLon(city.getLon());
-            dto.setLat(city.getLat());
-            dto.setEndDate(airPollutionRequestDto.getEndDate().atStartOfDay(ZoneId.systemDefault())
-                    .toInstant()
-                    .getEpochSecond());
+        dto.setLon(city.getLon());
+        dto.setLat(city.getLat());
+        dto.setEndDate(airPollutionRequestDto.getEndDate().atStartOfDay(ZoneId.systemDefault())
+                .toInstant()
+                .getEpochSecond());
 
-            dto.setStartDate(airPollutionRequestDto.getStartDate().atStartOfDay(ZoneId.systemDefault())
-                    .toInstant()
-                    .getEpochSecond());
-
-
-            AirQualityResponse airQualityResponse = cityService.getAirQuality(dto);
+        dto.setStartDate(airPollutionRequestDto.getStartDate().atStartOfDay(ZoneId.systemDefault())
+                .toInstant()
+                .getEpochSecond());
 
 
-            return airQualityResponse;
+        AirQualityResponse airQualityResponse = cityService.getAirQuality(dto);
+
+
+        return airQualityResponse;
+    }
+
+    @PostMapping("/location")
+    public AirQualityResponse returnPollutionByLocation(@RequestBody LocationRequestDto locationRequestDto )
+    {
+        QueueRequestPollutionRecordDto dto = new QueueRequestPollutionRecordDto();
+
+        dto.setLon(locationRequestDto.getLon());
+        dto.setLat(locationRequestDto.getLat());
+
+
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        /*System.out.println("--------------");
+        System.out.println(localDateTime);*/
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
+
+
+        dto.setEndDate(zonedDateTime.toInstant().getEpochSecond());
+        dto.setStartDate(zonedDateTime.toInstant().getEpochSecond() - 3600);
+
+        //System.out.println(dto.getEndDate()+" "+dto.getStartDate());
+
+
+        AirQualityResponse airQualityResponse = cityService.getAirQuality(dto);
+
+        return  airQualityResponse;
     }
 
 
