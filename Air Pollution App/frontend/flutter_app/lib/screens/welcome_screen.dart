@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/admin_login_screen.dart';
+import 'package:flutter_app/screens/user_login_screen.dart';
+import 'package:flutter_app/widgets/entry_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -14,12 +17,12 @@ class WelcomeScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Center(
+          const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 350),
-                const Text(
+                SizedBox(height: 350),
+                Text(
                   'AIR POLLUTION APP',
                   style: TextStyle(
                     fontSize: 36,
@@ -28,48 +31,20 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 50),
+                SizedBox(height: 50),
+
                 //UserButton
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 179, 255, 181),
-                    fixedSize: const Size(350, 60),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 60,
-                    ),
-                  ),
-                  child: const Text(
-                    'Kullanıcı',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Color.fromARGB(255, 48, 48, 48),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30),
+                EntryButton(
+                    buttonText: "Kullanıcı",
+                    pageRoute: UserLoginScreen(),
+                    backgroundColor: Color.fromARGB(255, 179, 255, 181)),
+                SizedBox(height: 30),
+
                 //AdminButton
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 135, 201, 255),
-                    fixedSize: const Size(350, 60),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 60,
-                    ),
-                  ),
-                  child: const Text(
-                    'Admin',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Color.fromARGB(255, 48, 48, 48),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                EntryButton(
+                    buttonText: "Admin",
+                    pageRoute: AdminLoginScreen(),
+                    backgroundColor: Color.fromARGB(255, 135, 201, 255)),
               ],
             ),
           ),
