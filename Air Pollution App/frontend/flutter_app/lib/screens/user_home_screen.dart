@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_app/services/location_service.dart';
 import 'package:flutter_app/services/location_city_service.dart';
 import 'package:geolocator/geolocator.dart';
@@ -106,5 +105,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
         ],
       ),
     );
+
   }
 }
