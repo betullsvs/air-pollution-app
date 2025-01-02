@@ -8,16 +8,16 @@ import org.example.airpollution.dto.QueueRequestPollutionRecordDto;
 import org.example.airpollution.model.City;
 import org.example.airpollution.service.ICityService;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("api/airPollution")
@@ -83,7 +83,11 @@ public class CityController {
         return  airQualityResponse;
     }
 
+    @GetMapping("/populer-cities")
+    public Map<String, AirQualityResponse> getPopularCitiesData() {
 
+        return cityService.getCityAirData(); // Cache'teki veriyi döndür
+    }
 
 
 
