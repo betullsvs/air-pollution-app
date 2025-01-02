@@ -1,7 +1,9 @@
 package org.example.airpollution.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.Getter;
+
 import lombok.RequiredArgsConstructor;
 import org.example.airpollution.PollutionDto.AirQualityResponse;
 import org.example.airpollution.dto.AirPollutionRequestDto;
@@ -25,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CityService implements ICityService{
 
 
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -35,7 +38,6 @@ public class CityService implements ICityService{
             "Ankara", new float[]{39.9208f, 32.8541f},
             "Izmir", new float[]{38.4192f, 27.1287f}
     );
-
 
 
 
@@ -90,6 +92,7 @@ public class CityService implements ICityService{
 
     }
 
+
     @Scheduled(fixedRate = 3600000) // saatte bir çalışır
     @Override
     public void getPopularCitiesData() {
@@ -113,26 +116,25 @@ public class CityService implements ICityService{
                 dto.setEndDate(zonedDateTime.toInstant().getEpochSecond());
                 dto.setStartDate(zonedDateTime.toInstant().getEpochSecond() - 3600);
 
-                // Log: Şehir verisi güncelleniyor
+              
                 System.out.println(city + " için hava kirliliği verileri güncelleniyor...");
 
-                // API'ye istek at
+              
                 AirQualityResponse response = getAirQuality(dto);
 
                 if (response != null) {
-                    // Gelen yanıtı cache'e ekle
+                    
                     cityAirData.put(city, response);
 
-                    // Log: Güncelleme başarılı
+                    
                     System.out.println(city + " için hava kirliliği verileri güncellendi.");
                 }
             } catch (Exception e) {
-                // Log: Hata durumu
+             
                 System.err.println(city + " için API isteği başarısız oldu: " + e.getMessage());
             }
         }
 
-        // Log: Güncelleme tamamlandı
         System.out.println("Hava kirliliği verileri güncellemesi tamamlandı: " + LocalDateTime.now());
 
 
@@ -142,6 +144,7 @@ public class CityService implements ICityService{
 
         return cityAirData;
     }
+
 
 
 }

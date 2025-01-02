@@ -8,6 +8,7 @@ import org.example.airpollution.dto.QueueRequestPollutionRecordDto;
 import org.example.airpollution.model.City;
 import org.example.airpollution.service.ICityService;
 import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -16,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 @RestController
 @RequestMapping("api/airPollution")
@@ -86,7 +88,6 @@ public class CityController {
 
         return cityService.getCityAirData(); // Cache'teki veriyi döndür
     }
-
 
 
 

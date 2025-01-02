@@ -6,7 +6,9 @@ import org.example.airpollution.dto.QueueRequestPollutionRecordDto;
 import org.example.airpollution.model.City;
 
 import java.util.List;
+
 import java.util.Map;
+
 
 public interface ICityService {
 
@@ -17,4 +19,5 @@ public interface ICityService {
     void getPopularCitiesData();
 
     Map<String, AirQualityResponse> getCityAirData();
+
 }
