@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/city_name_screen.dart';
 import 'package:flutter_app/widgets/air_quality_table.dart';
 import 'package:flutter_app/services/location_service.dart';
 import 'package:flutter_app/services/location_city_service.dart';
@@ -22,6 +23,26 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   double? _longitude;
   String _city = "Şehir bilgisi alınıyor...";
   Map<String, dynamic>? _components;
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 0) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const UserHomeScreen()),
+      );
+    } else if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const CityNameScreen()),
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -134,11 +155,16 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
+            icon: Icon(Icons.home),
+            label: "Anasayfa",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: "Bul",
           ),
         ],
       ),
