@@ -28,22 +28,31 @@ class AirQualityTable extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Text('Bileşenler',
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                      style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.black)),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Değerler',
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none,
+                          fontSize: 18,
+                          color: Colors.black)),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Durum',
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                      style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.black)),
                 ),
               ],
             ),
@@ -62,9 +71,10 @@ class AirQualityTable extends StatelessWidget {
                       entry.key.toUpperCase(),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          decoration: TextDecoration.none,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
                   ),
                   Padding(
@@ -75,8 +85,10 @@ class AirQualityTable extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         entry.value.toString(),
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 18),
+                        style: const TextStyle(
+                            decoration: TextDecoration.none,
+                            color: Colors.white,
+                            fontSize: 18),
                       ),
                     ),
                   ),
@@ -86,7 +98,10 @@ class AirQualityTable extends StatelessWidget {
                       status,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                          decoration: TextDecoration.none,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
                   ),
                 ],

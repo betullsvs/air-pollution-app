@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/city_name_screen.dart';
+import 'package:flutter_app/screens/populer_cities_screen.dart';
 import 'package:flutter_app/widgets/air_quality_table.dart';
 import 'package:flutter_app/services/location_service.dart';
 import 'package:flutter_app/services/location_city_service.dart';
 import 'package:flutter_app/services/location_air_pollution.dart';
 import 'package:geolocator/geolocator.dart';
+import '../widgets/entry_button.dart';
 import '../widgets/user_location.dart';
 
 class UserHomeScreen extends StatefulWidget {
@@ -147,6 +149,20 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                             ),
                           )
                         : AirQualityTable(components: _components!),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: EntryButton(
+                        buttonText: "Popüler Şehirleri Gör",
+                        pageRoute: PopulerCitiesScreen(),
+                        backgroundColor: Color.fromARGB(255, 135, 201, 255)),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: EntryButton(
+                        buttonText: "Kirlilik Tahmini Gör",
+                        pageRoute: PopulerCitiesScreen(),
+                        backgroundColor: Color.fromARGB(255, 135, 201, 255)),
                   ),
                 ],
               ),
