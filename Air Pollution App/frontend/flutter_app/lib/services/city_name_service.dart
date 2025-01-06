@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class CityNameService {
-  final String apiUrl = 'http://10.60.164.183:4000/api/airPollution/haurly';
+  final String apiUrl = 'http://192.168.13.246:4000/api/airPollution/haurly';
 
   Future<List<Map<String, dynamic>>> getCityData(
       String cityName, DateTime startDate, DateTime endDate) async {

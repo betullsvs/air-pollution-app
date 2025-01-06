@@ -89,7 +89,7 @@ class _CityNameScreenState extends State<CityNameScreen> {
     try {
       List<Map<String, dynamic>> cityData =
           await cityService.getCityData(cityName, _startDate!, _endDate!);
-
+      print("API'den gelen veri: $cityData");
       setState(() {
         _cityData = cityData;
         _showGraphic = true;

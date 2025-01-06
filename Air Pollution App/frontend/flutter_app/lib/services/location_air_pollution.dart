@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class LocationAirPollution {
-  final String baseUrl = "http://10.60.164.183:4000/api/airPollution";
+  final String baseUrl = "http://192.168.13.246:4000/api/airPollution";
 
   Future<Map<String, dynamic>> sendLocation(double lat, double lon) async {
     final url = Uri.parse("$baseUrl/location");
