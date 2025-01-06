@@ -25,10 +25,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation(); // Konum bilgisi
+    _getCurrentLocation(); // Konum bilgisi 
     _getCityFromLocation(); // Şehir bilgisi
   }
 
+  // Konum bilgisini almak
   Future<void> _getCurrentLocation() async {
     try {
       Position position = await _locationService.getCurrentLocation();
@@ -47,6 +48,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     }
   }
 
+  // Şehir bilgisini almak
   Future<void> _getCityFromLocation() async {
     String city = await _locationCityService.getCityFromLocation();
     setState(() {
@@ -54,9 +56,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     });
   }
 
+  // API'ye POST isteği gönderip, CO değerini kontrol et
   Future<void> _getAirPollutionData(double lat, double lon) async {
-    const String url = 'http://10.0.2.2:4000/api/airPollution/location';
-
+    const String url = 'http://192.168.8.205:4000/api/airPollution/location';
+    
     final response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
@@ -64,9 +67,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     );
 
     if (response.statusCode == 200) {
+      // API cevabını parse et
       final data = json.decode(response.body);
       final co = data['list'][0]['components']['co'];
 
+      // Eğer CO değeri 50'den büyükse bildirim gönder
       if (co > 50) {
         await Future.delayed(const Duration(seconds: 5));
         NotificationService.showNotification(

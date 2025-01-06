@@ -12,11 +12,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  geocoding: ^3.0.0
+  permission_handler: ^11.3.1
   geolocator: ^13.0.2
   http: ^1.2.2
-  geocoding: ^3.0.0
-  connectivity_plus: ^6.1.1
-  #flutter_local_notifications: ^12.0.0
+  flutter_local_notifications: ^14.0.0
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +25,7 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/images/app_icon.png
     - assets/images/wallpaper.png
     - assets/images/wallpaper1.jpg
   uses-material-design: true
