@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../config/api_config.dart';
 
 class PopulerCitiesService {
   Future<Map<String, dynamic>> fetchAirPollution() async {
-    final response = await http.get(Uri.parse(
-        'http://192.168.13.246:4000/api/airPollution/populer-cities'));
+    final response =
+        await http.get(Uri.parse('${ApiConfig.apiUrl}/populer-cities'));
 
     if (response.statusCode == 200) {
       var cityData = json.decode(response.body);

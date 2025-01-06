@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../config/api_config.dart';
+
 class LocationAirPollution {
-  final String baseUrl = "http://192.168.13.246:4000/api/airPollution";
+  static const String url = '${ApiConfig.apiUrl}/location';
 
   Future<Map<String, dynamic>> sendLocation(double lat, double lon) async {
-    final url = Uri.parse("$baseUrl/location");
-
     final response = await http.post(
-      url,
+      Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
       },
