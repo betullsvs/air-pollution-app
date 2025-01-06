@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Tarih formatlama kütüphanesi
-
+import 'package:intl/intl.dart';
 import '../services/city_name_service.dart';
+import '../services/storage_servis.dart';
 import 'city_graphic_screen.dart';
 import 'user_home_screen.dart';
 
@@ -20,6 +21,71 @@ class _CityNameScreenState extends State<CityNameScreen> {
   int _selectedIndex = 1;
   bool _showGraphic = true;
   List<Map<String, dynamic>> _cityData = [];
+
+  final StorageService _storageService = StorageService();
+// Veriyi dosyaya yazma
+  Future<void> _writeDataToFile() async {
+    final cityName = _cityController.text.trim();
+
+    if (cityName.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Lütfen bir şehir adı girin.")),
+      );
+      return;
+    }
+
+    final jsonData = jsonEncode({'cityName': cityName});
+    await _storageService.writeToAppSpecificStorage('cityData.json', jsonData);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Şehir adı dosyaya kaydedildi.")),
+    );
+  }
+
+// Dosyadan veri okuma
+  Future<void> _readDataFromFile() async {
+    String? content =
+        await _storageService.readFromAppSpecificStorage('cityData.json');
+
+    if (content != null) {
+      final data = jsonDecode(content);
+      final cityName = data['cityName'];
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Veri dosyadan okundu.")),
+      );
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Okunan Veri"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  const Text("Dosyadan okunan şehir adı:"),
+                  const SizedBox(height: 10),
+                  Text("Şehir: $cityName"),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Tamam"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Dosyaya Kaydedilen Şehir:")),
+      );
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -89,14 +155,15 @@ class _CityNameScreenState extends State<CityNameScreen> {
     try {
       List<Map<String, dynamic>> cityData =
           await cityService.getCityData(cityName, _startDate!, _endDate!);
-      print("API'den gelen veri: $cityData");
       setState(() {
         _cityData = cityData;
         _showGraphic = true;
       });
+
+      await _writeDataToFile();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Veriler alınamadı.")),
+        const SnackBar(content: Text("Veriler kaydedilemedi.")),
       );
     }
   }
@@ -194,8 +261,13 @@ class _CityNameScreenState extends State<CityNameScreen> {
                     child: const Text("BUL",
                         style: TextStyle(fontSize: 18, color: Colors.purple)),
                   ),
+                  ElevatedButton(
+                    onPressed: _readDataFromFile,
+                    child: const Text("Dosyaya Kaydedilen Şehir",
+                        style: TextStyle(fontSize: 18)),
+                  ),
+                  const SizedBox(height: 20),
                   if (_showGraphic) ...[
-                    const SizedBox(height: 20),
                     Expanded(
                       child: CityGraphic(data: _cityData),
                     ),
