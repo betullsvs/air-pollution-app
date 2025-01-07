@@ -7,12 +7,11 @@ import 'package:flutter_app/services/location_service.dart';
 import 'package:flutter_app/services/location_city_service.dart';
 import 'package:flutter_app/services/location_air_pollution.dart';
 import 'package:geolocator/geolocator.dart';
-
 import 'package:flutter_app/notification/notification_service.dart';  
 import 'package:http/http.dart' as http; 
-
 import '../widgets/entry_button.dart';
 import '../widgets/user_location.dart';
+
 
 
 class UserHomeScreen extends StatefulWidget {
@@ -133,6 +132,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Stack(
         children: [
           Positioned.fill(
@@ -170,19 +170,19 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              // Enlem ve boylam bilgilerini göstermek
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  _latitude != null && _longitude != null
-                      ? "Enlem: $_latitude, Boylam: $_longitude"
-                      : "Konum bilgisi alınıyor...",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[900],
+                const SizedBox(height: 16),
+                // Enlem ve boylam bilgilerini göstermek
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    _latitude != null && _longitude != null
+                        ? "Enlem: $_latitude, Boylam: $_longitude"
+                        : "Konum bilgisi alınıyor...",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[900],
+                    ),
                   ),
                 ),
               ),
@@ -240,6 +240,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
+
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Anasayfa",
