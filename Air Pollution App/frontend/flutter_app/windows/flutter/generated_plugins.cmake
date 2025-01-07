@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   geolocator_windows
   permission_handler_windows
+  connectivity_plus
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
