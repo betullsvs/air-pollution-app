@@ -11,6 +11,7 @@ import 'package:flutter_app/notification/notification_service.dart';
 import 'package:http/http.dart' as http; 
 import '../widgets/entry_button.dart';
 import '../widgets/user_location.dart';
+import 'predict_cities_screen.dart';
 
 
 
@@ -227,7 +228,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                     padding: EdgeInsets.all(8.0),
                     child: EntryButton(
                         buttonText: "Kirlilik Tahmini Gör",
-                        pageRoute: PopulerCitiesScreen(),
+                        pageRoute: PredictCitiesScreen(),
                         backgroundColor: Color.fromARGB(255, 135, 201, 255)),
                   ),
                 ],

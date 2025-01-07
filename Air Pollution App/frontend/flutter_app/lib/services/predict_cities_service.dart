@@ -3,23 +3,17 @@ import 'package:http/http.dart' as http;
 
 import '../config/api_config.dart';
 
-class CityNameService {
+class PredictCitiesService {
   final String apiUrl = '${ApiConfig.apiUrl}/haurly';
 
-  Future<List<Map<String, dynamic>>> getCityData(
-      String cityName, DateTime startDate, DateTime endDate) async {
-    final startLocalDate =
-        DateTime(startDate.year, startDate.month, startDate.day)
-            .toIso8601String()
-            .split('T')[0];
-    final endLocalDate = DateTime(endDate.year, endDate.month, endDate.day)
-        .toIso8601String()
-        .split('T')[0];
+  Future<List<Map<String, dynamic>>> getCityData(String cityName) async {
+    final DateTime startDate = DateTime(2025, 1, 10);
+    final DateTime endDate = DateTime(2025, 1, 11);
 
     final Map<String, dynamic> data = {
       'cityName': cityName,
-      'startDate': startLocalDate,
-      'endDate': endLocalDate,
+      'startDate': startDate.toIso8601String(),
+      'endDate': endDate.toIso8601String(),
     };
 
     try {
@@ -35,7 +29,7 @@ class CityNameService {
         List<Map<String, dynamic>> formattedData = [];
         for (var item in jsonResponse['list']) {
           int timestamp = item['dt'];
-          double co = item['components']['co'];
+          double pm2_5 = item['components']['pm2_5'];
 
           DateTime dateTime =
               DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
@@ -43,7 +37,7 @@ class CityNameService {
 
           formattedData.add({
             'hour': hour,
-            'co': co,
+            'pm2_5': pm2_5,
           });
         }
 
