@@ -117,6 +117,28 @@ Bu proje, **geçmiş, şimdiki zaman ve gelecek hava kirliliği verilerini göre
    -Cloud (AI)'dan alinan veriler ekranda gosterildi ve bagimliliklar guncellendi.
 ---
 
+## 🌳 **Branch Açıklamaları:**
+
+- **develop-authorization:** Basic auth kullanılmıştır. 2 user ve 1 admin yetkilendirilmiştir. User girişi için kullanıcı adları user1, user2 ve şifreleri sırasıyla betul , tarik dir. admin ise admin1 ve samet şifresiyle giriş yapılabilmektedir. 
+  
+- **develop-background-process:** Background-process ile favori 3 şehir için saatlik olarak hava kirliliği verileri güncelleniyor Ve ekranda gösteriliyor.
+  
+- **develop-broadcast-receiver:** Api isteğiyle kullanıcının anlık konum bilgisine göre çekilen hava kirliliği verilerinden co değeri alınır. Bu değer 50'den fazlaysa (kaynak:https://en.wikipedia.org/wiki/Air_quality_index) Kullanım kullanıcıya bildirim ile uyarı verilir.
+  
+- **develop-cloud-service:** İleriye dönük belli bir şehrin Hava kirlilik değerini tahmin etmek için en başta open weather map hapsinden 3 aylık ve her günün 24 saatindeki veriler kullanılarak bir veri seti oluşturulmuştur bu veri seti 0,8 train 0.2 test verisi olarak ayrıldıktan sonra LSTM modeli ile eğitilmiştir.
+  
+- **develop-connectivity:** Uygulama internet bağlantısını algılar ve buna göre davranış sergiler. Çevrimdışı modda yerel veriler gösterilir, internet varken API çağrısı yapılır.
+  
+- **develop-local-database:**  Kullanıcının son güncellenmiş hava kirliliği ve şehir bilgilerinin verilerini görebilmek için veriler yerel olarak saklanmıştır.
+  
+- **develop-restful-api:** Hava kirliliği verilerini üçüncü taraf bir API’den almak için kullanılır. CRUD işlemleri ile veriler yönetilir. Backend'de hava kirliliği verilerini sunan bir REST API oluşturulur.Burada saatlik verileri çekmek ve belli tarih aralığında belli şehrin hava kirlilik verilerine döndüren endpointler yazılmıştır.Springboot kullanılmıştır.
+  
+- **develop-sensor:** GPS ile kullanıcının bulunduğu enlem ve boylam bilgileri alınarak bulunduğu il ve ilçe ekranda gösterilir. Bu enlem ve boylam bilgileri apiye gönderilir.
+  
+- **develop-storage:** Kullanıcının hava değeri bilgilerini görmek için arattığı şehirler dosyaya kaydedilir. Kullanıcı buton aracılığıyla bu şehirleri görebilir. 
+  
+- **develop-ui:** Bulunduğu konum, konuma bağlı şehrin hava değerleri tablosu, aratılan şehrin hava değer grafiği, popüler şehirlerin hava değerleri tablosu, gelecek tahminlerine göre İstanbul'un saatlik hava değerleri ekranlarda gösterilmiştir.
+
 ## 📦 **Proje Yapısı:**
 ```plaintext
 📦 root
